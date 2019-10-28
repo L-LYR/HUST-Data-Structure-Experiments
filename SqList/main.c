@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "fcnmfy.h"
 #include "sqList.h"
-
+extern uint32_t N;
 #define toStr(x) #x
 #define feedbackUnit(func, str, arg)                              \
     do                                                            \
@@ -256,7 +256,7 @@ void interact(void)
         default:
             break;
         }
-        printf("\nEnter [1~14] to choose one of the operations listed above to continue:");
+        printf("\nEnter [1~%d] to choose one of the operations listed above to continue:", N - 1);
     }
     int i;
     for (i = 0; i < MAXN; ++i)

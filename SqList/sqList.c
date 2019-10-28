@@ -65,7 +65,7 @@ status LocateElem(sqList *L, elemType e, uint32_t *i,
                   bool (*cmp)(elemType, elemType))
 {
     ListNotExistError(L);
-    int j;
+    uint32_t j;
     for (j = 0; j < L->length; ++j)
     {
         if (cmp(e, L->elem[j]))
@@ -157,8 +157,9 @@ status ListTraverse(sqList *L, status (*visit)(sqList *, uint32_t))
 {
     ListNotExistError(L);
     status ret = OK;
+    uint32_t i;
     putchar('[');
-    for (uint32_t i = 1; i <= L->length; ++i)
+    for (i = 1; i <= L->length; ++i)
     {
         if (i > 1)
             putchar(',');

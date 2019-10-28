@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdint.h>
 static const uint32_t maxWid = 60, gap = 3;
-static uint32_t maxLen = 0;
 static const char *funcName[] = {
     "exit",
     "InitList",
@@ -25,11 +24,11 @@ static const char *funcName[] = {
     "ChangeList",
     "AddList",
 };
+static uint32_t maxLen = 0, N = sizeof(funcName) / sizeof(*funcName);
 
 void listFunc(void)
 {
-    uint32_t i, j,
-        N = sizeof(funcName) / sizeof(*funcName);
+    uint32_t i, j;
 
     for (i = 0; i < N; ++i)
         if (strlen(funcName[i]) > maxLen)
