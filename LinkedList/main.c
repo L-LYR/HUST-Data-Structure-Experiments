@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "fcnmfy.h"
-#include "LinkedList.h"
+#include "linkedList.h"
 extern uint32_t N;
 #define toStr(x) #x
 #define feedbackUnit(func, str, arg)                              \
