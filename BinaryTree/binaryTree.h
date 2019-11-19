@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "stack.h"
 
 //status code
 typedef enum
@@ -16,19 +15,19 @@ typedef enum
     OK = 1,
 } status;
 
-typedef uint32_t IDType; //from 0 to UINT32_MAX to encode each node or tree sequentially
-
+typedef uint32_t IDType;
+typedef uint32_t elemType;
 typedef struct TreeNode treeNode;
 struct TreeNode
 {
-    elemType data;
     IDType id;
+    elemType data; //no-use now
     treeNode *lchild, *rchild;
 };
 typedef struct BinaryTree
 {
     treeNode *root;
-    IDType cnt;
+    uint32_t cnt;
 } btree;
 
 //create a binary tree by definition
@@ -68,8 +67,12 @@ status DeleteNode(btree *T, IDType e);
 
 //four kinds of traverses
 status PreOrderTraverse(btree *T, status (*visit)(treeNode *));
-status INOrderTraverse(btree *T, status (*visit)(treeNode *));
+status InOrderTraverse(btree *T, status (*visit)(treeNode *));
 status PostOrderTraverse(btree *T, status (*visit)(treeNode *));
 status LevelOrderTraverse(btree *T, status (*visit)(treeNode *));
 
+//save in file
+status SaveInFile(btree *T, const char *fileName,
+                  status (*visit)(treeNode *));
+status ParseFromFile(btree **T, const char *fileName);
 #endif

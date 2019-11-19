@@ -236,24 +236,30 @@ status SaveInFile(linkedList *L, const char *fileName,
 //parse the linkedList file
 status ParseFromFile(linkedList **L, const char *fileName)
 {
-    status ret;
-    if (*L == NULL)
-    {
-        *L = (linkedList *)malloc(sizeof(linkedList));
-        InitList(L);
-    }
-    else if ((*L)->length != 0)
-        ClearList(*L);
+    status ret = OK;
     FILE *fp = freopen(fileName, "r", stdin);
     if (fp == NULL)
-        exit(1);
-    elemType e;
-    getchar();
-    while ((scanf("%d%*c", &e) == 1))
-        if ((ret = ListInsert(*L, (*L)->length + 1, e)) != OK)
-            break;
-    getchar();
-    fclose(fp);
+    {
+        fprintf(stdout, "Cannot open the file or wrong address!\n");
+        ret = INFEASIBLE;
+    }
+    else
+    {
+        if (*L == NULL)
+        {
+            *L = (linkedList *)malloc(sizeof(linkedList));
+            InitList(L);
+        }
+        else if ((*L)->length != 0)
+            ClearList(*L);
+        elemType e;
+        getchar();
+        while ((scanf("%d%*c", &e) == 1))
+            if ((ret = ListInsert(*L, (*L)->length + 1, e)) != OK)
+                break;
+        getchar();
+        fclose(fp);
+    }
     //取消平台依赖性
     freopen(
 #ifdef _WIN32

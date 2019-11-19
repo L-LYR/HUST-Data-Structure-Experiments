@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "fcnmfy.h"
 #include "linkedList.h"
+
 extern uint32_t N;
 #define toStr(x) #x
 #define feedbackUnit(func, str, arg)                              \
@@ -224,11 +225,11 @@ void interact(void)
             case ERROR:
                 fprintf(stdout, "linkedList does not exist!\n");
                 break;
-            default:
-                if (ListEmpty(L[numL]))
-                    fprintf(stdout, "File Format Error!\n");
-                else
-                    fprintf(stdout, "Parse from file %s successfully!\n", fileName);
+            case INFEASIBLE:
+                fprintf(stdout, "File Format Error!\n");
+                break;
+            case OK:
+                fprintf(stdout, "Parse from file %s successfully!\n", fileName);
                 break;
             }
             break;

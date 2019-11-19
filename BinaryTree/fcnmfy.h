@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
-static const uint32_t maxWid = 60, gap = 3;
+static const uint32_t maxWid = 80, gap = 3;
 static const char *funcName[] = {
     "exit",
     "CreateBiTree",
@@ -20,7 +20,11 @@ static const char *funcName[] = {
     "PreOrderTraverse",
     "InOrderTraverse",
     "PostOrderTraverse",
-    "LevelOrderTraverse"
+    "LevelOrderTraverse",
+    "SaveInFile",
+    "ParseFromFile",
+    "ChooseTree",
+    "AddTree",
 };
 static uint32_t maxLen = 0, N = sizeof(funcName) / sizeof(*funcName);
 
