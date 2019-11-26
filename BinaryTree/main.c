@@ -59,6 +59,7 @@ void switchCmd(void)
     list = (btree **)malloc(sizeof(btree *) * size);
     list[cur] = malloc(sizeof(btree));
     list[cur]->root = NULL;
+    list[cur]->cnt = 0;
     while ((scanf("%d", &cmdID) == 1) && cmdID != 0)
     {
         switch (cmdID)

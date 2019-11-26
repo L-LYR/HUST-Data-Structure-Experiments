@@ -62,8 +62,8 @@ status CreateBiTree(btree **T, char *def)
     }
     if ((*T)->root != NULL)
         ret = ClearBiTree(*T);
-    if (*def == '[' && *(def + 1) == ']')
-        return ret;
+    // if (*def == '[' && *(def + 1) == ']')
+    // return ret;
     //create binary tree recurssively
     if (ret == OK)
         CreateNode(&((*T)->root), def);
