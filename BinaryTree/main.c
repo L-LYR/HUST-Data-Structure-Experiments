@@ -290,7 +290,10 @@ void switchCmd(void)
             while (scanf("%d", &cur) != 1)
                 getchar();
             if (cur < 0 || cur >= size)
+            {
                 fprintf(stdout, "Out of range!");
+                break;
+            }
             fprintf(stdout, "Change to BinaryTree %d successfully!", cur);
             break;
         case 18:
