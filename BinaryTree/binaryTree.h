@@ -21,7 +21,7 @@ typedef struct TreeNode treeNode;
 struct TreeNode
 {
     IDType id;
-    elemType data; //no-use now
+    elemType data; 
     treeNode *lchild, *rchild;
 };
 typedef struct BinaryTree

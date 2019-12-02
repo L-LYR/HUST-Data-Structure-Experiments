@@ -62,8 +62,8 @@ status CreateBiTree(btree **T, char *def)
     }
     if ((*T)->root != NULL)
         ret = ClearBiTree(*T);
-    // if (*def == '[' && *(def + 1) == ']')
-    // return ret;
+    if (*def == '[' && *(def + 1) == ']')
+        return ret;
     //create binary tree recurssively
     if (ret == OK)
         CreateNode(&((*T)->root), def);
@@ -177,13 +177,13 @@ treeNode *GetSibling(btree *T, IDType e)
     treeNode *p = FindNode(T->root, e);
     if (p == NULL)
         return (void *)INFEASIBLE;
-    p = GetParent(T->root, p);
-    if (p == NULL)
+    treeNode *q = GetParent(T->root, p);
+    if (q == NULL)
         return (void *)INFEASIBLE;
-    if (p->lchild->id == e)
-        return p->rchild;
+    if (q->lchild == p)
+        return q->rchild;
     else
-        return p->lchild;
+        return q->lchild;
 }
 
 status InsertNode(btree *T, IDType e, InsertMan LR, treeNode *c)

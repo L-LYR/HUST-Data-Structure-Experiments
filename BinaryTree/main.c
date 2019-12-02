@@ -172,8 +172,7 @@ void switchCmd(void)
             if (p == (void *)ERROR)
                 fprintf(stdout, INFO NOT_EXIST, cur);
             else if (p == (void *)INFEASIBLE)
-                fprintf(stdout, INFO " has no %u node or it is the root node!",
-                        cur, searchID);
+                fprintf(stdout, INFO " has no %u node or it is the root node!", cur, searchID);
             else if (p != NULL)
                 fprintf(stdout, "%u node's sibling is %u node.", searchID, p->id);
             else
@@ -315,6 +314,9 @@ void switchCmd(void)
         }
         printf("\nEnter [0~%d] to choose one of the operations listed above to continue:", N - 1);
     }
+    for (int i = 0; i < size; ++i)
+        DestroyBiTree(&list[i]);
+    free(list);
 }
 
 int main(void)
