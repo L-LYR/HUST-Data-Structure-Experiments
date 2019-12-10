@@ -415,7 +415,10 @@ status SaveInFile(btree *T, const char *fileName,
         return ERROR;
     FILE *fp = freopen(fileName, "w", stdout);
     if (fp == NULL)
-        exit(1);
+    {
+        fprintf(stdout, "Cannot open the file or wrong address!\n");
+        return INFEASIBLE;
+    }
     status ret = PreOrderTraverse(T, visit);
     fclose(fp);
     freopen(
@@ -431,12 +434,14 @@ status SaveInFile(btree *T, const char *fileName,
 
 status ParseFromFile(btree **T, const char *fileName)
 {
+    if (T == NULL)
+        return ERROR;
     status ret = OK;
     FILE *fp = freopen(fileName, "r", stdin);
     if (fp == NULL)
     {
         fprintf(stdout, "Cannot open the file or wrong address!\n");
-        ret = INFEASIBLE;
+        return INFEASIBLE;
     }
     else
     {

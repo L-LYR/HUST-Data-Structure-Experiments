@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef void *QueueElemType;
+#define QueueElemType size_t
 typedef struct QueueNode queueNode;
 struct QueueNode
 {
@@ -32,7 +32,7 @@ void enqueue(queue *q, QueueElemType e)
 QueueElemType dequeue(queue *q)
 {
     if (q->head == NULL)
-        return NULL;
+        return -1;
     QueueElemType ret = q->head->data;
     if (q->tail == q->head)
         q->tail = NULL;

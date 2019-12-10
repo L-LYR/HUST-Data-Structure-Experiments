@@ -5,7 +5,7 @@
 
 #define INIT_SIZE 256
 
-typedef void *StackElemType;
+#define StackElemType size_t
 
 typedef struct
 {
