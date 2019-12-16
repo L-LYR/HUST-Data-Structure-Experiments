@@ -1,6 +1,5 @@
 #include "graph.h"
 #include "fcnmfy.h"
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,6 +12,7 @@ size_t cmd = 0, vexAddrBp = 0, vexAddrEp = 0;
 weightType Weight;
 status ret;
 node *adjVex = NULL;
+int flag;
 
 #define Info "Graph %u"
 
@@ -20,13 +20,10 @@ void inputDef(char def[][MAX_BUFFER_SIZE]);
 void display_adjlist(tab *t, size_t vn);
 void display_nodelist(node *h);
 
-void initTestEnv(void)
-{
-    g = (graph **)malloc(sizeof(graph *) * size);
-}
-
 void interact(void)
 {
+    g = (graph **)malloc(sizeof(graph *) * size);
+    memset(g, 0, sizeof(graph *) * size);
     listFunc();
     while (scanf("%d", &cmd) == 1 && cmd != 0)
     {
@@ -34,6 +31,34 @@ void interact(void)
         switch (cmd)
         {
         case 1:
+            if (flag == 0)
+            {
+                fprintf(stdout, "\nFormat input is shown as below:\n"
+                                "[number of vertex,number of edges]\n"
+                                "[ids of vertex]\n"
+                                "[weight of vertex]\n"
+                                "...\n"
+                                "[begin point of edge_i, end point of edge_i, weight of edge_i]\n"
+                                "...\n\n"
+                                "For example, "
+                                "a graph which has five vertex and eight edges is defined as below:"
+                                "[5,8]\n"
+                                "[1,2,3,4,5]\n"
+                                "[100,200,300,400,500]\n"
+                                "[1,2,1]\n"
+                                "[1,4,4]\n"
+                                "[1,5,5]\n"
+                                "[2,3,2]\n"
+                                "[2,5,7]\n"
+                                "[3,4,3]\n"
+                                "[3,5,8]\n"
+                                "[4,5,6]\n"
+                                "\nEspecially for empty graph we have:\n"
+                                "[0,0]\n"
+                                "[]\n"
+                                "[]\n\n");
+                flag = 1;
+            }
             fprintf(stdout, "Please enter the format definition of graph:\n");
             memset(def, 0, sizeof(def));
             inputDef(def);
@@ -48,7 +73,7 @@ void interact(void)
                 fprintf(stdout, "Too many vertice!\n");
                 break;
             default:
-                fprintf(stdout, Info " is created successfully!\n", cur);
+                fprintf(stdout, Info " is created successfully!\nIt's displayed in physical structure as below:\n\n", cur);
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -102,7 +127,7 @@ void interact(void)
                 fprintf(stdout, "Vertex doesn't exist!\n");
                 break;
             case OK:
-                fprintf(stdout, "Assign successfully\n");
+                fprintf(stdout, "Assign successfully\nIt's displayed in physical structure as below:\n\n");
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -152,7 +177,7 @@ void interact(void)
                 fprintf(stdout, "Vertex exists or beyond the limit vertice number!\n");
                 break;
             case OK:
-                fprintf(stdout, "Insert successfully\n");
+                fprintf(stdout, "Insert successfully\nIt's displayed in physical structure as below:\n\n");
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -171,7 +196,7 @@ void interact(void)
                 fprintf(stdout, "Vertex doesn't exist!\n");
                 break;
             case OK:
-                fprintf(stdout, "Delete successfully\n");
+                fprintf(stdout, "Delete successfully\nIt's displayed in physical structure as below:\n\n");
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -193,7 +218,7 @@ void interact(void)
                 fprintf(stdout, "Vertice don't exist or edge already exists!\n");
                 break;
             case OK:
-                fprintf(stdout, "Insert successfully\n");
+                fprintf(stdout, "Insert successfully\nIt's displayed in physical structure as below:\n\n");
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -215,7 +240,7 @@ void interact(void)
                 fprintf(stdout, "Vertice don't exist or edge doesn't exist!\n");
                 break;
             case OK:
-                fprintf(stdout, "Delete successfully\n");
+                fprintf(stdout, "Delete successfully\nIt's displayed in physical structure as below:\n\n");
                 display_adjlist(g[cur]->al, g[cur]->vn);
                 break;
             }
@@ -281,6 +306,32 @@ void interact(void)
                 display_adjlist(g[cur]->al, g[cur]->vn);
             }
             break;
+        case 17:
+            fprintf(stdout, "\nFormat input is shown as below:\n"
+                            "[number of vertex,number of edges]\n"
+                            "[ids of vertex]\n"
+                            "[weight of vertex]\n"
+                            "...\n"
+                            "[begin point of edge_i, end point of edge_i, weight of edge_i]\n"
+                            "...\n\n"
+                            "For example, "
+                            "a graph which has five vertex and eight edges is defined as below:"
+                            "[5,8]\n"
+                            "[1,2,3,4,5]\n"
+                            "[100,200,300,400,500]\n"
+                            "[1,2,1]\n"
+                            "[1,4,4]\n"
+                            "[1,5,5]\n"
+                            "[2,3,2]\n"
+                            "[2,5,7]\n"
+                            "[3,4,3]\n"
+                            "[3,5,8]\n"
+                            "[4,5,6]\n"
+                            "\nEspecially for empty graph we have:\n"
+                            "[0,0]\n"
+                            "[]\n"
+                            "[]\n\n");
+            break;
         }
         listFunc();
     }
@@ -299,7 +350,6 @@ void clearEnv(void)
 
 int main(void)
 {
-    initTestEnv();
     interact();
     clearEnv();
     return 0;

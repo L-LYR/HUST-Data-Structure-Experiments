@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
-static const uint32_t maxWid = 80, gap = 3;
+static const uint32_t maxWid = 90, gap = 3;
 static const char *funcName[] = {
     "exit",
     "CreateGraph",
@@ -23,6 +23,7 @@ static const char *funcName[] = {
     "ChooseGraph",
     "SaveInFile",
     "ParseFromFile",
+    "InputExample",
 };
 static uint32_t maxLen = 0, N = sizeof(funcName) / sizeof(*funcName);
 

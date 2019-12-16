@@ -291,10 +291,18 @@ status DeleteVex(graph *g, idType v)
 {
     if (g == NULL)
         return ERROR;
-    size_t i = 0;
+    size_t i = 0, j = 0;
     if ((i = find_vex(g->al, v)) == MAX_V_NUM)
         return INFEASIBLE;
-    delete_list(g->al[i].lh);
+    node *p = g->al[i].lh, *last = NULL;
+    while (p != NULL)
+    {
+        last = p;
+        p = p->next;
+        j = find_vex(g->al, last->ni.ev);
+        --(g->al[j].ti.adjNum);
+        free(last);
+    }
     g->al[i].ti.bv = 0;
     for (int i = 0; i < MAX_V_NUM; ++i)
         if (g->al[i].ti.bv != 0)
@@ -328,6 +336,8 @@ status InsertArc(graph *g, idType v, idType u)
         return ret;
     if ((ret = insert_arc(g->al, u, v, 0)) != OK)
         return ret;
+    ++(g->al[i].ti.adjNum);
+    ++(g->al[j].ti.adjNum);
     ++(g->en);
     return ret; //update
 }
@@ -343,7 +353,9 @@ status DeleteArc(graph *g, idType v, idType u)
         return INFEASIBLE;
     g->al[i].lh = delete_node(g->al[i].lh, u);
     g->al[j].lh = delete_node(g->al[j].lh, v);
-    (g->en)--;
+    --(g->al[i].ti.adjNum);
+    --(g->al[j].ti.adjNum);
+    --(g->en);
     return OK;
 }
 
@@ -449,7 +461,7 @@ void display_adjlist(tab *t, size_t vn)
 {
     if (vn == 0)
     {
-        fprintf(stdout, "<EMPTY>\n");
+        fprintf(stdout, "<EMPTY>\n\n");
         return;
     }
     size_t i, j;
@@ -464,6 +476,7 @@ void display_adjlist(tab *t, size_t vn)
             ++j;
         }
     }
+    putchar('\n');
     putchar('\n');
 }
 
