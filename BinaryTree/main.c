@@ -52,6 +52,7 @@ treeNode *p;
 char lr;
 InsertMan LR;
 char fileName[80], def[80];
+int flag = 0;
 
 void switchCmd(void)
 {
@@ -65,6 +66,19 @@ void switchCmd(void)
         switch (cmdID)
         {
         case 1:
+            if (flag == 0)
+            {
+                fprintf(stdout, "\nFormat input is shown as below:\n"
+                                "[node_1,node_2,node_3,...,node_n]\n"
+                                "If the node does not exist, you should input a blank.\n"
+                                "And the sequence obey the pre-order traverse.\n"
+                                "For example, "
+                                "a tree is defined as below:\n"
+                                "[11,22,33, , ,44,55, ,66, , ,77, , ,88, , ]\n"
+                                "\nEspecially for empty tree we have:\n"
+                                "[]\n");
+                flag = 1;
+            }
             fprintf(stdout, "Enter the formated defination of the " INFO ".\n", cur);
             getchar();
             scanf("%[^\n]%*c", def);
@@ -312,10 +326,22 @@ void switchCmd(void)
                 fprintf(stdout, "AddList succeed!");
             }
             break;
+        case 19:
+            fprintf(stdout, "\nFormat input is shown as below:\n"
+                            "[node_1,node_2,node_3,...,node_n]\n"
+                            "If the node does not exist, you should input a blank.\n"
+                            "And the sequence obey the pre-order traverse.\n"
+                            "For example, "
+                            "a tree is defined as below:\n"
+                            "[11,22,33, , ,44,55, ,66, , ,77, , ,88, , ]\n"
+                            "\nEspecially for empty tree we have:\n"
+                            "[]\n");
+            break;
         default:
             break;
         }
-        printf("\nEnter [0~%d] to choose one of the operations listed above to continue:", N - 1);
+        putchar('\n');
+        listFunc();
     }
     for (int i = 0; i < size; ++i)
         DestroyBiTree(&list[i]);

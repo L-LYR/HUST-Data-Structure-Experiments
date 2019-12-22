@@ -25,6 +25,7 @@ static const char *funcName[] = {
     "ParseFromFile",
     "ChooseTree",
     "AddTree",
+    "InputExample",
 };
 static uint32_t maxLen = 0, N = sizeof(funcName) / sizeof(*funcName);
 

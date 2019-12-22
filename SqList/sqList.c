@@ -179,7 +179,14 @@ status SaveInFile(sqList *L, const char *fileName,
         exit(1);
     status ret = ListTraverse(L, visit);
     fclose(fp);
-    freopen("CON", "w", stdout);
+    freopen(
+#ifdef _WIN32
+        "CON"
+#elif __linux__
+        "/dev/tty"
+#endif
+        ,
+        "w", stdout);
     return ret;
 }
 
@@ -203,6 +210,13 @@ status ParseFromFile(sqList **L, const char *fileName)
             break;
     getchar();
     fclose(fp);
-    freopen("CON", "r", stdin);
+    freopen(
+#ifdef _WIN32
+        "CON"
+#elif __linux__
+        "/dev/tty"
+#endif
+        ,
+        "r", stdin);
     return ret;
 }

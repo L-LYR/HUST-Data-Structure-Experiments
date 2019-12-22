@@ -254,10 +254,19 @@ void interact(void)
                 fprintf(stdout, "AddList succeed!\n");
             feedbackUnit(InitList, NULL, &L[MAXN - 1]);
             break;
+        case 17:
+            fprintf(stdout, "\nFormat input file is shown as below:\n"
+                            "[element1,element2,...,elementn]\n"
+                            "For example, "
+                            "a list whose length is 10 is defined as below:\n"
+                            "[1,2,3,4,5,6,7,8,9,0]\n"
+                            "\nEspecially for empty list we have:\n"
+                            "[]\n");
+            break;
         default:
             break;
         }
-        printf("\nEnter [1~%d] to choose one of the operations listed above to continue:", N - 1);
+        listFunc();
     }
     int i;
     for (i = 0; i < MAXN; ++i)
